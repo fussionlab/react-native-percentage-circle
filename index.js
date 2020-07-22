@@ -4,7 +4,8 @@
  ** to fixed react native version
  **/
 
-import React, { Component } from 'react';
+import { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   StyleSheet,
   View,
@@ -50,17 +51,7 @@ const styles = StyleSheet.create({
 });
 
 class PercentageCircle extends Component {
-  propTypes: {
-    color: React.PropTypes.string,
-    bgcolor: React.PropTypes.string,
-    innerColor: React.PropTypes.string,
-    radius: React.PropTypes.number,
-    percent: React.PropTypes.number,
-    borderWidth: React.Proptypes.number,
-    textStyle: React.Proptypes.array,
-    disabled: React.PropTypes.bool,
-  }
-
+ 
   constructor(props) {
     super(props);
     let percent = this.props.percent;
@@ -83,8 +74,8 @@ class PercentageCircle extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    let percent = nextProps.percent;
+  static getDerivedStateFromProps(props, state) {
+    let percent = props.percent;
     let leftTransformerDegree = '0deg';
     let rightTransformerDegree = '0deg';
     if (percent >= 50) {
@@ -93,12 +84,13 @@ class PercentageCircle extends Component {
     } else {
       rightTransformerDegree = percent * 3.6 + 'deg';
     }
-    this.setState({
-      percent: this.props.percent,
-      borderWidth: this.props.borderWidth < 2 || !this.props.borderWidth ? 2 : this.props.borderWidth,
+    return {
+      percent: props.percent,
+      borderWidth:
+        props.borderWidth < 2 || !props.borderWidth ? 2 : props.borderWidth,
       leftTransformerDegree: leftTransformerDegree,
-      rightTransformerDegree: rightTransformerDegree
-    });
+      rightTransformerDegree: rightTransformerDegree,
+    };
   }
 
   render() {
@@ -164,7 +156,16 @@ class PercentageCircle extends Component {
     );
   }
 }
-
+PercentageCircle.propTypes = {
+  color: PropTypes.string,
+  bgcolor: PropTypes.string,
+  innerColor: PropTypes.string,
+  radius: PropTypes.number,
+  percent: PropTypes.number,
+  borderWidth: PropTypes.number,
+  textStyle: PropTypes.array,
+  disabled: PropTypes.bool,
+};
 // set some attributes default value
 PercentageCircle.defaultProps = {
   bgcolor: '#e3e3e3',
