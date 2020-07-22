@@ -23,12 +23,13 @@
   },
   "homepage": "https://github.com/JackPu/react-native-percentage-circle#readme",
   "dependencies": {
-    "react": "^16.3.2"
+    "prop-types": "^15.7.2",
+    "react": "16.11.0"
   },
   "devDependencies": {
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "react-dom": "^16.3.2",
+    "react-dom": "^16.11.2",
     "react-native-mock": "^0.3.1"
   }
 }
